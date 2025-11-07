@@ -7,20 +7,24 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container" id="container">
-    <!-- Suas fotos -->
-    <div class="card" style="background-image: url('foto2.png');"></div>
-    <div class="card" style="background-image: url('foto1.png');"></div>
-    <div class="card" style="background-image: url('foto2.png');"></div>
-    <div class="card" style="background-image: url('foto1.png');"></div>
+  <!-- Tela inicial -->
+  <div id="start-screen">
+    <h1>🎉 Parabéns, Pâmela (Pampam)! 🎂</h1>
+    <button id="start-btn">TOQUE PARA COMEÇAR 💙</button>
+  </div>
+
+  <!-- Container das fotos -->
+  <div class="container hidden" id="container">
+    <div class="card" style="background-image: url('foto1.jpg');"></div>
+    <div class="card" style="background-image: url('foto2.jpg');"></div>
+    <div class="card" style="background-image: url('foto3.jpg');"></div>
+    <div class="card" style="background-image: url('foto4.jpg');"></div>
   </div>
 
   <!-- Música da Xuxa -->
-  <audio id="musica" autoplay loop>
-    <source src="Xuxa.mp3" type="audio/mpeg">
+  <audio id="musica" loop>
+    <source src="parabens-xuxa.mp3" type="audio/mpeg">
   </audio>
-
-  <canvas id="confetti"></canvas>
 
   <script src="script.js"></script>
 </body>

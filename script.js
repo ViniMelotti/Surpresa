@@ -1,8 +1,23 @@
+const startScreen = document.getElementById("start-screen");
+const startBtn = document.getElementById("start-btn");
 const container = document.getElementById("container");
 const cards = document.querySelectorAll(".card");
+const musica = document.getElementById("musica");
+
 let current = 0;
 
-// Efeito de "passar pro lado"
+// Quando o usuário toca para começar
+startBtn.addEventListener("click", () => {
+  startScreen.classList.add("hidden");
+  container.classList.remove("hidden");
+
+  // Toca a música da Xuxa
+  musica.play().catch(() => {
+    alert("Ative o som para ouvir a música da Xuxa! 🎶");
+  });
+});
+
+// Passar as fotos pro lado
 cards.forEach((card, index) => {
   card.style.zIndex = cards.length - index;
   card.addEventListener("click", () => nextCard(card));
