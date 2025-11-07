@@ -1,31 +1,36 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Parabéns, Pâmela (Pampam)!</title>
+  <title>Parabéns, Pâmela!</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Tela inicial -->
   <div id="start-screen">
-    <h1>🎉 Parabéns, Pâmela (Pampam)! 🎂</h1>
-    <button id="start-btn">TOQUE PARA COMEÇAR 💙</button>
+    <h1>🎉 Clique para começar 🎉</h1>
+    <button id="start-btn">Começar</button>
   </div>
 
-  <!-- Container das fotos -->
-  <div class="container hidden" id="container">
-    <div class="card" style="background-image: url('foto1.jpg');"></div>
-    <div class="card" style="background-image: url('foto2.jpg');"></div>
-    <div class="card" style="background-image: url('foto3.jpg');"></div>
-    <div class="card" style="background-image: url('foto4.jpg');"></div>
+  <div id="gallery" class="hidden">
+    <div class="photos">
+      <img src="foto1.jpg" alt="Foto 1">
+      <img src="foto2.jpg" alt="Foto 2">
+      <img src="foto3.jpg" alt="Foto 3">
+      <img src="foto4.jpg" alt="Foto 4">
+    </div>
+
+    <div class="message hidden">
+      <h2>🎂 Parabéns, Pâmela! 🎂</h2>
+      <p>
+        Hoje é teu dia, e eu só quero dizer que tu é uma das pessoas mais
+        incríveis, engraçadas e caóticas que já cruzaram meu caminho 😂💙  
+        Que nunca te falte risada, meme e motivo pra sorrir!
+      </p>
+    </div>
   </div>
 
-  <!-- Música da Xuxa -->
-  <audio id="musica" loop>
-    <source src="Xuxa.mp3" type="audio/mpeg">
-  </audio>
-
+  <audio id="music" src="Xuxa.mp3"></audio>
   <script src="script.js"></script>
 </body>
 </html>
