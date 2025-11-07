@@ -8,13 +8,20 @@ let current = 0;
 
 // Quando o usuário toca para começar
 startBtn.addEventListener("click", () => {
-  startScreen.classList.add("hidden");
-  container.classList.remove("hidden");
+  // Efeito de fade-out
+  startScreen.classList.add("fade-out");
 
-  // Toca a música da Xuxa
+  // Inicia a música
   musica.play().catch(() => {
     alert("Ative o som para ouvir a música da Xuxa! 🎶");
   });
+
+  // Mostra as fotos depois da animação
+  setTimeout(() => {
+    startScreen.classList.add("hidden");
+    container.classList.remove("hidden");
+    container.classList.add("show");
+  }, 1000); // tempo igual à duração do fade
 });
 
 // Passar as fotos pro lado
