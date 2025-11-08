@@ -1,89 +1,78 @@
-* {
-  box-sizing: border-box;
-}
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&display=swap');
 
 body {
   margin: 0;
   padding: 0;
-  height: 100vh;
-  width: 100vw;
-  background: linear-gradient(135deg, #001f3f, #003366, #004080);
+  font-family: 'Dancing Script', cursive;
+  background: linear-gradient(to bottom, #001a33, #003366);
   color: white;
-  font-family: "Great Vibes", cursive;
+  text-align: center;
+  min-height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+#start-screen {
   text-align: center;
-  overflow: hidden;
+}
+
+#start-btn {
+  background-color: #0077ff;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 10px;
+  font-size: 1.5em;
+  cursor: pointer;
+  transition: 0.3s;
+  font-family: 'Dancing Script', cursive;
+}
+
+#start-btn:hover {
+  background-color: #005bb5;
 }
 
 .hidden {
   display: none;
 }
 
-#container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 90%;
-  max-width: 400px;
-}
-
-#start-btn {
-  background: white;
-  color: #003366;
-  border: none;
-  padding: 15px 30px;
-  border-radius: 10px;
-  font-size: 1.3em;
-  cursor: pointer;
-  transition: 0.3s;
-  font-family: "Great Vibes", cursive;
-}
-
-#start-btn:hover {
-  background: #e0e0ff;
-  transform: scale(1.05);
-}
-
 #photo-area {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  position: relative;
+  width: 80%;
+  max-width: 350px;
+  height: 350px;
+  overflow: hidden;
+  border-radius: 15px;
+  margin-top: 20px;
 }
 
 #photo {
-  width: 80vw;
-  max-width: 350px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   border-radius: 15px;
   opacity: 0;
-  transform: scale(0.95);
-  transition: opacity 1s ease, transform 1s ease;
+  transition: opacity 0.5s ease;
 }
 
 #photo.show {
   opacity: 1;
-  transform: scale(1);
 }
 
 #message {
   background: rgba(255, 255, 255, 0.1);
   margin-top: 20px;
-  padding: 25px;
+  padding: 30px;
   border-radius: 20px;
   opacity: 0;
   transition: opacity 1.5s ease;
-  font-size: 1.6em;
-  line-height: 1.4em;
-  animation: glow 3s ease-in-out infinite alternate;
+  font-size: 2.2em;       /* 👈 fonte maior */
+  line-height: 1.5em;
+  font-weight: 600;
 }
 
 #message.show {
   opacity: 1;
-}
-
-@keyframes glow {
-  from { text-shadow: 0 0 5px #66aaff, 0 0 10px #0044cc; }
-  to { text-shadow: 0 0 15px #99ccff, 0 0 25px #66aaff; }
 }
