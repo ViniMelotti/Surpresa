@@ -1,34 +1,37 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Parabéns, Pâmela!</title>
+  <title>Feliz Aniversário, Pâmela!</title>
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 </head>
 <body>
   <div id="container">
     <div id="start-screen">
-      <h1>🎉 Clique para começar 🎉</h1>
-      <button id="start-btn">Começar</button>
+      <h1>🎉 Surpresa para Pâmela 🎉</h1>
+      <button id="start-btn">Clique para começar 🎁</button>
     </div>
 
-    <div id="photo-area" class="hidden">
-      <img id="photo" src="" alt="Foto surpresa">
-      <div id="message" class="hidden">
-        <h2>🎂 Parabéns, Pâmela! 🎂</h2>
-        <p>
-          Hoje é teu dia, e eu só quero dizer que tu é uma das pessoas mais
-          incríveis, engraçadas e caóticas que já cruzaram meu caminho 😂💙  
-          Que nunca te falte risada, meme e motivo pra sorrir!
-        </p>
-      </div>
+    <div id="slideshow" class="hidden">
+      <img id="photo" src="" alt="Nossas fotos">
+    </div>
+
+    <div id="message" class="hidden">
+      <h2>🎂 Feliz Aniversário, Pâmela! 🎂</h2>
+      <p>
+        Que seu dia seja iluminado como o seu sorriso 💖<br>
+        Obrigado por cada momento, cada risada e cada lembrança.<br>
+        Você é incrível — e merece o mundo inteiro! 🌎💐
+      </p>
     </div>
   </div>
 
-  <audio id="music" src="Xuxa.mp3" preload="auto"></audio>
+  <audio id="music" src="Xuxa.mp3"></audio>
 
-  <script src="script.js" defer></script>
+  <!-- Biblioteca de confete -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <script src="script.js"></script>
 </body>
 </html>

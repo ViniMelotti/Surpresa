@@ -1,51 +1,71 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const startBtn = document.getElementById("start-btn");
-  const startScreen = document.getElementById("start-screen");
-  const photoArea = document.getElementById("photo-area");
-  const photo = document.getElementById("photo");
-  const message = document.getElementById("message");
-  const music = document.getElementById("music");
+const startBtn = document.getElementById('start-btn');
+const startScreen = document.getElementById('start-screen');
+const slideshow = document.getElementById('slideshow');
+const message = document.getElementById('message');
+const photo = document.getElementById('photo');
+const music = document.getElementById('music');
 
-  // 🔹 coloque aqui as suas 4 imagens
-  const fotos = ["foto1.jpg", "foto2.jpg", "foto3.jpg", "foto4.jpg"];
+// Coloque aqui o nome das suas fotos
+const images = [
+  "foto1.jpg",
+  "foto2.jpg",
+  "foto3.jpg",
+  "foto4.jpg"
+];
 
-  startBtn.addEventListener("click", async () => {
-    startScreen.classList.add("hidden");
-    photoArea.classList.remove("hidden");
+let currentImage = 0;
 
-    // tenta tocar música
-    try {
-      await music.play();
-    } catch {
-      console.log("Autoplay bloqueado — toque manual pode ser necessário.");
-    }
+startBtn.addEventListener('click', () => {
+  // Toca a música
+  music.play();
 
-    let index = 0;
+  // Esconde a tela inicial e mostra o slideshow
+  startScreen.classList.add('hidden');
+  slideshow.classList.remove('hidden');
 
-    const mostrarProxima = () => {
-      if (index < fotos.length) {
-        // troca imagem
-        photo.classList.remove("show");
-        setTimeout(() => {
-          photo.src = fotos[index];
-          photo.classList.add("show");
-          index++;
-          // próxima imagem após 2.5s
-          setTimeout(mostrarProxima, 2500);
-        }, 500);
-      } else {
-        // acabou as fotos → mostra a mensagem
-        setTimeout(() => {
-          photo.classList.remove("show");
-          photo.style.display = "none";
-          message.classList.remove("hidden");
-          setTimeout(() => {
-            message.classList.add("show");
-          }, 300);
-        }, 1500);
-      }
-    };
+  // Começa a troca de fotos
+  changePhoto();
 
-    mostrarProxima();
-  });
+  // Mostra mensagem e ativa confete depois do slideshow
+  setTimeout(() => {
+    slideshow.classList.add('hidden');
+    message.classList.remove('hidden');
+    startConfetti(); // 🎉 confete começa aqui
+  }, images.length * 3000 + 1000);
 });
+
+function changePhoto() {
+  photo.src = images[currentImage];
+  currentImage++;
+
+  if (currentImage < images.length) {
+    setTimeout(changePhoto, 3000); // muda a cada 3s
+  }
+}
+
+// Função para soltar confete por alguns segundos
+function startConfetti() {
+  const duration = 5 * 1000; // 5 segundos
+  const end = Date.now() + duration;
+
+  (function frame() {
+    confetti({
+      particleCount: 5,
+      angle: 60,
+      spread: 55,
+      origin: { x: 0 },
+      colors: ['#ff69b4', '#ffffff', '#ffd700']
+    });
+    confetti({
+      particleCount: 5,
+      angle: 120,
+      spread: 55,
+      origin: { x: 1 },
+      colors: ['#ff69b4', '#ffffff', '#ffd700']
+    });
+
+    if (Date.now() < end) {
+      requestAnimationFrame(frame);
+    }
+  })();
+}

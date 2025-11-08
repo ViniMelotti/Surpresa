@@ -1,78 +1,62 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&display=swap');
-
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Dancing Script', cursive;
-  background: linear-gradient(to bottom, #001a33, #003366);
-  color: white;
-  text-align: center;
-  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #ffdde1, #ee9ca7);
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-#start-screen {
+  height: 100vh;
   text-align: center;
+  color: #fff;
+  overflow: hidden;
 }
 
-#start-btn {
-  background-color: #0077ff;
-  color: white;
+#container {
+  max-width: 600px;
+  padding: 20px;
+}
+
+h1, h2 {
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+}
+
+button {
+  background-color: #ff4081;
   border: none;
+  color: white;
   padding: 15px 30px;
-  border-radius: 10px;
-  font-size: 1.5em;
+  font-size: 18px;
+  border-radius: 25px;
   cursor: pointer;
   transition: 0.3s;
-  font-family: 'Dancing Script', cursive;
 }
 
-#start-btn:hover {
-  background-color: #005bb5;
+button:hover {
+  background-color: #e91e63;
 }
 
 .hidden {
   display: none;
 }
 
-#photo-area {
-  position: relative;
-  width: 80%;
-  max-width: 350px;
-  height: 350px;
-  overflow: hidden;
-  border-radius: 15px;
-  margin-top: 20px;
-}
-
-#photo {
+#slideshow img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 15px;
-  opacity: 0;
-  transition: opacity 0.5s ease;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  animation: fade 1s ease-in-out;
 }
 
-#photo.show {
-  opacity: 1;
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 #message {
-  background: rgba(255, 255, 255, 0.1);
-  margin-top: 20px;
-  padding: 30px;
-  border-radius: 20px;
-  opacity: 0;
-  transition: opacity 1.5s ease;
-  font-size: 2.2em;       /* 👈 fonte maior */
-  line-height: 1.5em;
-  font-weight: 600;
+  animation: fadeIn 2s ease-in forwards;
 }
 
-#message.show {
-  opacity: 1;
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
