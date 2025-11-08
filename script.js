@@ -5,7 +5,7 @@ const message = document.getElementById('message');
 const photo = document.getElementById('photo');
 const music = document.getElementById('music');
 
-// Coloque aqui o nome das suas fotos
+// Substitua pelos nomes reais das suas fotos
 const images = [
   "foto1.jpg",
   "foto2.jpg",
@@ -26,11 +26,12 @@ startBtn.addEventListener('click', () => {
   // Começa a troca de fotos
   changePhoto();
 
-  // Mostra mensagem e ativa confete depois do slideshow
+  // Mostra mensagem e ativa confete + digitação depois do slideshow
   setTimeout(() => {
     slideshow.classList.add('hidden');
     message.classList.remove('hidden');
     startConfetti(); // 🎉 confete começa aqui
+    typeText(); // 📝 efeito de digitação
   }, images.length * 3000 + 1000);
 });
 
@@ -43,7 +44,7 @@ function changePhoto() {
   }
 }
 
-// Função para soltar confete por alguns segundos
+// Função de confete
 function startConfetti() {
   const duration = 5 * 1000; // 5 segundos
   const end = Date.now() + duration;
@@ -68,4 +69,24 @@ function startConfetti() {
       requestAnimationFrame(frame);
     }
   })();
+}
+
+// Função de digitação
+function typeText() {
+  const textElement = document.getElementById('typed-text');
+  const fullText = textElement.innerHTML.trim();
+  textElement.innerHTML = '';
+
+  let index = 0;
+
+  function type() {
+    if (index < fullText.length) {
+      const char = fullText[index];
+      textElement.innerHTML += char === '\n' ? '<br>' : char;
+      index++;
+      setTimeout(type, 35); // velocidade da digitação
+    }
+  }
+
+  type();
 }
