@@ -1,28 +1,39 @@
 const startBtn = document.getElementById("start-btn");
 const startScreen = document.getElementById("start-screen");
-const gallery = document.getElementById("gallery");
-const photos = document.querySelectorAll(".photos img");
-const message = document.querySelector(".message");
+const photoArea = document.getElementById("photo-area");
+const photo = document.getElementById("photo");
+const message = document.getElementById("message");
 const music = document.getElementById("music");
+
+// Coloque aqui as suas imagens (mesmo nome dos arquivos que estão na pasta)
+const fotos = ["foto1.jpg", "foto2.jpg", "foto3.jpg", "foto4.jpg"];
 
 startBtn.addEventListener("click", () => {
   startScreen.classList.add("hidden");
-  gallery.classList.remove("hidden");
+  photoArea.classList.remove("hidden");
 
-  // Tocar música
-  music.play().catch(() => {
-    console.log("Autoplay bloqueado, o usuário precisa interagir com a página.");
-  });
+  // Toca a música
+  music.play().catch(() => console.log("Autoplay bloqueado, toque manual pode ser necessário."));
 
-  // Mostrar fotos com intervalo
-  photos.forEach((photo, index) => {
+  let index = 0;
+
+  // Mostra fotos uma a uma
+  const mostrarFotos = setInterval(() => {
+    photo.classList.remove("show"); // esconde a anterior
+
     setTimeout(() => {
-      photo.classList.add("show");
-    }, 800 * index);
-  });
+      photo.src = fotos[index];
+      photo.classList.add("show"); // mostra a próxima
+      index++;
 
-  // Mostrar mensagem depois das fotos
-  setTimeout(() => {
-    message.classList.add("show");
-  }, photos.length * 800 + 1000);
+      if (index === fotos.length) {
+        clearInterval(mostrarFotos);
+        // Mostrar mensagem após a última imagem
+        setTimeout(() => {
+          photo.classList.remove("show");
+          message.classList.add("show");
+        }, 1500);
+      }
+    }, 600);
+  }, 2500); // tempo entre as fotos
 });
