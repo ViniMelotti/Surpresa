@@ -13,10 +13,16 @@ const images = [
   "foto4.jpg"
 ];
 
+// 🟢 Corrigido: garante que o áudio inicie sem travar o código
 startButton.addEventListener('click', () => {
   startScreen.classList.add('hidden');
   slideshow.classList.remove('hidden');
-  music.play();
+
+  // tenta tocar a música — se falhar, continua o site mesmo assim
+  music.play().catch(() => {
+    console.warn("Autoplay bloqueado — música iniciará após interação.");
+  });
+
   startSlideshow();
 });
 
@@ -37,6 +43,7 @@ function startSlideshow() {
   }, 3000);
 }
 
+// ✏️ Efeito de digitação
 function typeText() {
   const textElement = document.getElementById('typed-text');
   const fullText = textElement.innerHTML.trim();
@@ -48,6 +55,7 @@ function typeText() {
       const char = fullText[index];
       textElement.innerHTML += char === '\n' ? '<br>' : char;
       index++;
+      textElement.scrollTop = textElement.scrollHeight;
       setTimeout(type, 30);
     }
   }
@@ -55,7 +63,7 @@ function typeText() {
   type();
 }
 
-// 🎉 Confete
+// 🎉 Confete animado
 const confettiCtx = confettiCanvas.getContext('2d');
 confettiCanvas.width = window.innerWidth;
 confettiCanvas.height = window.innerHeight;
@@ -68,6 +76,7 @@ function randomColor() {
 }
 
 function startConfetti() {
+  confetti = [];
   for (let i = 0; i < 150; i++) {
     confetti.push({
       x: Math.random() * confettiCanvas.width,

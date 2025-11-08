@@ -4,27 +4,25 @@
   box-sizing: border-box;
 }
 
-body {
-  height: 100vh;
+html, body {
+  height: 100%;
+  width: 100%;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #a9c9ff, #f3f9ff);
+  color: #1a1a1a;
+  overflow-x: hidden;
+}
+
+/* Tela inicial */
+#start-screen {
+  text-align: center;
+  position: fixed;
+  inset: 0;
   background: linear-gradient(135deg, #a9c9ff, #f3f9ff);
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  font-family: "Poppins", sans-serif;
-  color: #1a1a1a;
-  overflow: hidden;
-}
-
-h1, h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #fff;
-  text-shadow: 0 0 10px rgba(0,0,0,0.3);
-}
-
-#start-screen {
-  text-align: center;
 }
 
 #start-button {
@@ -44,6 +42,14 @@ h1, h2 {
   transform: scale(1.05);
 }
 
+/* Slideshow */
+#slideshow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 #slideshow img {
   width: 90vw;
   max-width: 500px;
@@ -52,18 +58,16 @@ h1, h2 {
   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
-.hidden {
-  display: none;
-}
-
+/* Mensagem final */
 #message {
   text-align: center;
   width: 100%;
-  height: 100vh;
-  overflow-y: auto; /* <-- permite rolar */
+  min-height: 100vh;
   padding: 20px;
   background: linear-gradient(135deg, #ff80ab, #fce4ec);
   color: #fff;
+  overflow-y: auto;
+  position: relative;
 }
 
 #typed-text-container {
@@ -74,15 +78,22 @@ h1, h2 {
   backdrop-filter: blur(6px);
   color: #fff;
   max-width: 600px;
-  margin: auto;
+  margin: 20px auto;
   text-align: left;
   white-space: pre-wrap;
   line-height: 1.7;
 }
 
+/* Confete */
 canvas#confetti {
   position: fixed;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
+}
+
+.hidden {
+  display: none;
 }
