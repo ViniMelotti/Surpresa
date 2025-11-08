@@ -6,13 +6,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const message = document.getElementById("message");
   const music = document.getElementById("music");
 
-  // 👉 Troque pelos nomes exatos das suas fotos
+  // 🔹 coloque aqui as suas 4 imagens
   const fotos = ["foto1.jpg", "foto2.jpg", "foto3.jpg", "foto4.jpg"];
 
   startBtn.addEventListener("click", async () => {
     startScreen.classList.add("hidden");
     photoArea.classList.remove("hidden");
 
+    // tenta tocar música
     try {
       await music.play();
     } catch {
@@ -23,21 +24,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const mostrarProxima = () => {
       if (index < fotos.length) {
-        // troca a imagem
+        // troca imagem
         photo.classList.remove("show");
         setTimeout(() => {
           photo.src = fotos[index];
           photo.classList.add("show");
           index++;
-          setTimeout(mostrarProxima, 2500); // próxima depois de 2,5s
+          // próxima imagem após 2.5s
+          setTimeout(mostrarProxima, 2500);
         }, 500);
       } else {
-        // fim das fotos → mostra a mensagem
+        // acabou as fotos → mostra a mensagem
         setTimeout(() => {
           photo.classList.remove("show");
+          photo.style.display = "none";
           message.classList.remove("hidden");
-          message.classList.add("show");
-        }, 1000);
+          setTimeout(() => {
+            message.classList.add("show");
+          }, 300);
+        }, 1500);
       }
     };
 
