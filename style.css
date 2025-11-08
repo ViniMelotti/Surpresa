@@ -1,15 +1,19 @@
-body {
+html, body {
+  height: auto;
+  min-height: 100%;
   margin: 0;
   padding: 0;
+}
+
+body {
   font-family: "Poppins", sans-serif;
   background: linear-gradient(135deg, #ffdde1, #ee9ca7);
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   text-align: center;
   color: #fff;
-  overflow: hidden;
+  overflow: hidden; /* mantém sem rolagem no começo */
 }
 
 #container {
@@ -54,6 +58,9 @@ button:hover {
 
 #message {
   animation: fadeIn 2s ease-in forwards;
+  max-height: 100vh;      /* altura máxima da tela */
+  overflow-y: auto;       /* permite rolagem */
+  padding-bottom: 50px;   /* espaço pro fim do texto */
 }
 
 @keyframes fadeIn {
