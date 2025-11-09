@@ -9,13 +9,15 @@ const heartsCanvas = document.getElementById('hearts');
 const heartsCtx = heartsCanvas.getContext('2d');
 
 startButton.addEventListener('click', () => {
-  music.play().catch(() => {}); // evita erro de autoplay no celular
+  music.play().catch(() => {}); // evita erro no celular
   startButton.style.display = "none";
   startScreen.style.opacity = "0";
+
   setTimeout(() => {
     startScreen.classList.add('hidden');
     message.classList.remove('hidden');
     typeText();
+    startConfetti(25000); // confete começa junto com a mensagem
   }, 600);
 });
 
@@ -35,7 +37,8 @@ function typeText() {
       setTimeout(type, 30);
     } else {
       secretContainer.classList.remove('hidden');
-      secretInput.focus();
+      // Foco só após aparecer (para funcionar no celular)
+      setTimeout(() => secretInput.focus({ preventScroll: true }), 300);
     }
   }
   type();
@@ -46,7 +49,6 @@ secretInput.addEventListener('input', () => {
   if (secretInput.value.trim().toLowerCase() === "30/10/2025") {
     easterEgg.classList.remove('hidden');
     startHearts();
-    startConfetti(5000); // confete dura 5 segundos
   }
 });
 
@@ -54,7 +56,7 @@ secretInput.addEventListener('input', () => {
 function startHearts() {
   heartsCanvas.width = window.innerWidth;
   heartsCanvas.height = window.innerHeight;
-  heartsCanvas.style.pointerEvents = "none"; // não bloqueia toques
+  heartsCanvas.style.pointerEvents = "none";
   let hearts = [];
 
   for (let i = 0; i < 60; i++) {
@@ -89,7 +91,7 @@ function startHearts() {
   drawHearts();
 }
 
-// 🎊 Confetes coloridos (com tempo definido)
+// 🎊 Confetes coloridos
 function startConfetti(duration = 5000) {
   const confettiCanvas = document.createElement("canvas");
   const ctx = confettiCanvas.getContext("2d");
