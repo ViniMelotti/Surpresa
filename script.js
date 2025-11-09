@@ -16,12 +16,12 @@ startButton.addEventListener('click', () => {
   setTimeout(() => {
     startScreen.classList.add('hidden');
     message.classList.remove('hidden');
+    startConfetti(30000); // 🎊 confete começa
     typeText();
-    startConfetti(26000); // confete começa junto com a mensagem
   }, 600);
 });
 
-// Efeito de digitação
+// Efeito de digitação da mensagem
 function typeText() {
   const textElement = document.getElementById('typed-text');
   const fullText = textElement.innerHTML.trim();
@@ -36,9 +36,15 @@ function typeText() {
       textElement.scrollTop = textElement.scrollHeight;
       setTimeout(type, 30);
     } else {
-      secretContainer.classList.remove('hidden');
-      // Foco só após aparecer (para funcionar no celular)
-      setTimeout(() => secretInput.focus({ preventScroll: true }), 300);
+      // Mostra o campo do código e garante foco no celular
+      setTimeout(() => {
+        secretContainer.classList.remove('hidden');
+        secretContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(() => {
+          secretInput.disabled = false;
+          secretInput.focus({ preventScroll: true });
+        }, 400);
+      }, 1000);
     }
   }
   type();
@@ -91,7 +97,7 @@ function startHearts() {
   drawHearts();
 }
 
-// 🎊 Confetes coloridos
+// 🎉 Confetes coloridos
 function startConfetti(duration = 5000) {
   const confettiCanvas = document.createElement("canvas");
   const ctx = confettiCanvas.getContext("2d");
