@@ -3,49 +3,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Feliz Aniversário, Pâmela!</title>
+  <title>Surpresa para Pâmela 🎉</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="container">
-    <div id="start-screen">
-      <h1>🎉 Surpresa para Pâmela 🎉</h1>
-      <button id="start-btn">Clique para começar 🎁</button>
-    </div>
+  <audio id="music" preload="auto">
+    <source src="Xuxa.mp3" type="audio/mpeg">
+    Seu navegador não suporta áudio.
+  </audio>
 
-    <div id="slideshow" class="hidden">
-      <img id="photo" src="" alt="Nossas fotos">
-    </div>
+  <div id="start-screen">
+    <h1>🎉 Surpresa para Pâmela 🎉</h1>
+    <button id="start-button">Clique para começar 💖</button>
+  </div>
 
-    <div id="message" class="hidden">
-      <h2>🎂 Feliz Aniversário, Pâmela! 🎂</h2>
+  <div id="message" class="hidden">
+    <h2>🎂 Feliz Aniversário, Pâmela! 🎂</h2>
+    <div id="typed-text-container">
       <p id="typed-text">
-        Hoje é o seu dia — o dia de se tornar mais velha, né? 19 aninhos! 🥳🎂
+        Hoje é o seu dia — o dia de se tornar mais velha né, 19 aninhos. 🎉
 
-        Sério, você é uma amiga simplesmente incrível:
-        engraçada na medida certa (ou errada, dependendo da piada — e mesmo assim continua sendo incrível),
-        parceira pra qualquer ideia maluca, e com um coração gigante que vive distribuindo amor, caos e memes em doses equilibradas. 💖
-
-        você espalha risada, amor e umas boas doses de bagunça.
-        E é por isso que estar do seu lado é tipo ouvir uma boa música:
+        Sério, você é uma amiga simplesmente incrível: 
+        engraçada, parceira pra qualquer ideia maluca, e com um coração gigante que vive distribuindo amor, caos e memes em doses equilibradas. 💖
+ 
+        você espalha risada, amor e umas boas doses de bagunça. 
+        E é por isso que estar do seu lado é tipo ouvir uma boa música: 
         a gente se sente bem sem nem saber o motivo. 🎶
 
-        Obrigado por ser essa pessoa que transforma dias normais
-        em histórias que a gente vai rir pra sempre.
-        Você merece o mundo inteiro —
-        e se o mundo não couber, pelo menos um pedaço de bolo
-        e essa linda surpresa já ajudam. 🍰✨
+        Obrigado por ser essa pessoa que transforma dias normais em histórias que a gente vai rir pra sempre. 
+        Você merece o mundo inteiro — e se o mundo não couber, pelo menos um pedaço de bolo e essa linda surpresa já ajudam. 🍰
 
-        Parabéns, Pâmela — vulgo Pampam! 💕
+        Aproveita cada segundo, dança, ri e lembra: 
+        tem gente que te admira pra caramba.  
+
+        Parabéns Pâmela, vulgo Pampam! 💕
+
+        (psst... tem um segredinho escondido 👀)
       </p>
+    </div>
+
+    <div id="secret-container" class="hidden">
+      <input type="text" id="secret-input" placeholder="Digite o código secreto...">
+    </div>
+
+    <div id="easter-egg" class="hidden">
+      🎉 Achou o Easter Egg! 🎉<br>
+      Se você descobriu isso, saiba que você é muito, MUITO, especial 💖
     </div>
   </div>
 
-  <audio id="music" src="Xuxa.mp3"></audio>
-
-  <!-- Biblioteca de confete -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-
+  <canvas id="hearts"></canvas>
   <script src="script.js"></script>
 </body>
 </html>
