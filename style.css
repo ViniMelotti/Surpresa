@@ -1,104 +1,92 @@
-* {
+body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
-
-html, body {
-  height: 100%;
-  width: 100%;
-  font-family: "Poppins", sans-serif;
-  background: #ffc0cb; /* rosinha */
-  color: #1a1a1a;
-  overflow: hidden;
-}
-
-#start-screen {
+  background: linear-gradient(135deg, #ff9ac4, #ffb6c1, #ffd1dc);
+  color: #ff1493;
+  font-family: "Quicksand", sans-serif;
+  overflow-x: hidden;
   text-align: center;
-  position: fixed;
-  inset: 0;
-  background: #ffc0cb;
+  min-height: 100vh;
+  scroll-behavior: smooth;
+}
+
+.tela-inicial {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  transition: opacity 0.5s ease;
+  height: 100vh;
+  transition: opacity 0.8s ease;
 }
 
-#start-button {
-  padding: 15px 25px;
-  font-size: 1.1em;
-  border: none;
-  border-radius: 25px;
-  background-color: #ff80ab;
+h1 {
+  font-weight: 600;
+  font-size: 2em;
+  text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.5);
+}
+
+button {
+  background: #ff4eb8;
   color: white;
+  border: none;
+  padding: 15px 30px;
+  margin-top: 20px;
+  border-radius: 25px;
+  font-size: 1.1em;
   cursor: pointer;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
   transition: 0.3s;
+  box-shadow: 0 4px 10px rgba(255, 105, 180, 0.4);
 }
 
-#start-button:hover {
-  background-color: #ff4081;
+button:hover {
+  background: #ff74cc;
   transform: scale(1.05);
 }
 
-#message {
-  text-align: center;
-  width: 100%;
-  height: 100vh;
-  padding: 20px;
-  background: #ffc0cb;
-  color: #fff;
-  overflow-y: auto;
-}
-
-#typed-text-container {
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 20px;
-  padding: 25px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(6px);
-  color: #fff;
-  max-width: 600px;
-  margin: 20px auto;
-  text-align: left;
-  white-space: pre-wrap;
-  line-height: 1.7;
-}
-
-#secret-container {
-  margin-top: 25px;
-}
-
-#secret-input {
-  padding: 10px 15px;
-  border-radius: 15px;
-  border: none;
-  outline: none;
-  font-size: 1em;
-  text-align: center;
-}
-
-#easter-egg {
-  margin-top: 30px;
-  font-size: 1.3em;
-  background: rgba(255, 255, 255, 0.2);
-  padding: 20px;
-  border-radius: 15px;
-  max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-canvas#hearts {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-.hidden {
+.mensagem-oculta {
   display: none;
+  padding: 20px;
+  max-width: 850px;
+  margin: 80px auto;
+  font-size: 1.25em;
+  line-height: 1.8em;
+  background: rgba(255, 255, 255, 0.65); /* fundo mais transparente */
+  color: #c2185b;
+  border-radius: 25px;
+  box-shadow: 0 0 25px rgba(255, 192, 203, 0.4);
+  transition: all 1s ease;
+}
+
+#texto p {
+  margin-bottom: 1.4em;
+}
+
+#resultado {
+  margin-top: 20px;
+  font-size: 1.3em;
+  color: #d63384;
+  font-weight: bold;
+}
+
+input {
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: none;
+  margin-top: 10px;
+  font-size: 1em;
+  outline: none;
+  box-shadow: 0 0 10px rgba(255, 182, 193, 0.6);
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(15px);
+  animation: aparecer 1.2s forwards;
+}
+
+@keyframes aparecer {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

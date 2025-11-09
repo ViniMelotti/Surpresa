@@ -1,162 +1,133 @@
-const startButton = document.getElementById('start-button');
-const startScreen = document.getElementById('start-screen');
-const message = document.getElementById('message');
-const music = document.getElementById('music');
-const secretContainer = document.getElementById('secret-container');
-const secretInput = document.getElementById('secret-input');
-const easterEgg = document.getElementById('easter-egg');
-const heartsCanvas = document.getElementById('hearts');
-const heartsCtx = heartsCanvas.getContext('2d');
+// elementos
+const botaoComecar = document.getElementById("botaoComecar");
+const inicio = document.getElementById("inicio");
+const mensagem = document.getElementById("mensagem");
+const texto = document.getElementById("texto");
+const musica = document.getElementById("musica");
+const easterEgg = document.getElementById("easterEgg");
+const senhaInput = document.getElementById("senha");
+const verificar = document.getElementById("verificar");
+const resultado = document.getElementById("resultado");
 
-startButton.addEventListener('click', () => {
-  music.play().catch(() => {}); // evita erro no celular
-  startButton.style.display = "none";
-  startScreen.style.opacity = "0";
+// texto com parágrafos
+const mensagemParagrafos = [
+  "Hoje é o seu dia — o dia de se tornar mais velha né, 19 aninhos. 🎉",
+  "Sério, você é uma amiga simplesmente incrível: engraçada, parceira pra qualquer ideia maluca, e com um coração gigante que vive distribuindo amor, caos e memes em doses equilibradas. 💖",
+  "Você espalha risada, amor e umas boas doses de bagunça. E é por isso que estar do seu lado é tipo ouvir uma boa música: a gente se sente bem sem nem saber o motivo. 🎶",
+  "Obrigado por ser essa pessoa que transforma dias normais em histórias que a gente vai rir pra sempre. Você merece o mundo inteiro — e se o mundo não couber, pelo menos um pedaço de bolo e essa linda surpresa já ajudam. 🍰",
+  "Aproveita cada segundo, dança, ri e lembra: tem gente que te admira pra caramba.",
+  "Parabéns Pâmela, vulgo Pampam! 💕",
+  "(psst... tem um segredinho escondido 👀)"
+];
 
-  setTimeout(() => {
-    startScreen.classList.add('hidden');
-    message.classList.remove('hidden');
-    startConfetti(30000); // 🎊 confete começa
-    typeText();
-  }, 600);
+// iniciar site
+botaoComecar.addEventListener("click", () => {
+  inicio.style.opacity = "0";
+  setTimeout(() => (inicio.style.display = "none"), 800);
+  mensagem.style.display = "block";
+  mensagem.classList.add("fade-in");
+  musica.play();
+  escreverParagrafos(mensagemParagrafos, texto, 40);
+  iniciarConfete(30); // confete lateral colorido + corações
 });
 
-// Efeito de digitação da mensagem
-function typeText() {
-  const textElement = document.getElementById('typed-text');
-  const fullText = textElement.innerHTML.trim();
-  textElement.innerHTML = '';
-  let index = 0;
+// função para escrever os parágrafos
+function escreverParagrafos(paragrafos, container, velocidade) {
+  let pIndex = 0;
+  let charIndex = 0;
+  let atual = document.createElement("p");
+  container.appendChild(atual);
 
-  function type() {
-    if (index < fullText.length) {
-      const char = fullText[index];
-      textElement.innerHTML += char === '\n' ? '<br>' : char;
-      index++;
-      textElement.scrollTop = textElement.scrollHeight;
-      setTimeout(type, 30);
+  const intervalo = setInterval(() => {
+    if (charIndex < paragrafos[pIndex].length) {
+      atual.textContent += paragrafos[pIndex].charAt(charIndex);
+      charIndex++;
     } else {
-      // Mostra o campo do código e garante foco no celular
-      setTimeout(() => {
-        secretContainer.classList.remove('hidden');
-        secretContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      pIndex++;
+      if (pIndex < paragrafos.length) {
+        atual = document.createElement("p");
+        container.appendChild(atual);
+        charIndex = 0;
+        window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+      } else {
+        clearInterval(intervalo);
         setTimeout(() => {
-          secretInput.disabled = false;
-          secretInput.focus({ preventScroll: true });
-        }, 400);
-      }, 1000);
+          easterEgg.style.display = "block";
+          easterEgg.classList.add("fade-in");
+          window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+        }, 1500);
+      }
     }
-  }
-  type();
+  }, velocidade);
+}
+
+// confetes e corações caindo dos lados
+function iniciarConfete(duracao) {
+  const end = Date.now() + duracao * 1000;
+  (function frame() {
+    // confetes laterais
+    confetti({
+      particleCount: 4,
+      angle: 60,
+      spread: 70,
+      origin: { x: 0 },
+      colors: ["#ff69b4", "#ffd700", "#00cfff", "#adff2f", "#ff4500"]
+    });
+    confetti({
+      particleCount: 4,
+      angle: 120,
+      spread: 70,
+      origin: { x: 1 },
+      colors: ["#ff69b4", "#ffd700", "#00cfff", "#adff2f", "#ff4500"]
+    });
+    // corações também caindo dos lados
+    confetti({
+      particleCount: 3,
+      angle: 90,
+      spread: 80,
+      startVelocity: 20,
+      origin: { x: Math.random() > 0.5 ? 0 : 1, y: 0 },
+      colors: ["#ff1493", "#ff69b4", "#ffc0cb", "#fff0f5"],
+      scalar: 1.4,
+      shapes: ["heart"]
+    });
+    if (Date.now() < end) requestAnimationFrame(frame);
+  })();
 }
 
 // Easter Egg
-secretInput.addEventListener('input', () => {
-  if (secretInput.value.trim().toLowerCase() === "30/10/2025") {
-    easterEgg.classList.remove('hidden');
-    startHearts();
+verificar.addEventListener("click", () => {
+  if (senhaInput.value.trim() === "30/10/2025") {
+    resultado.innerHTML = `🎉 Achou o Easter Egg! 🎉<br>
+      Se você descobriu isso saiba que você é muito, MUITO especial. Quando precisar de mim pode ligar 💖`;
+    easterEgg.classList.add("fade-in");
+    iniciarCoracoes(15);
+    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+  } else {
+    resultado.textContent = "Senha incorreta! 😜";
   }
 });
 
-// ❤️ Corações flutuando
-function startHearts() {
-  heartsCanvas.width = window.innerWidth;
-  heartsCanvas.height = window.innerHeight;
-  heartsCanvas.style.pointerEvents = "none";
-  let hearts = [];
-
-  for (let i = 0; i < 60; i++) {
-    hearts.push({
-      x: Math.random() * heartsCanvas.width,
-      y: Math.random() * heartsCanvas.height + heartsCanvas.height,
-      size: Math.random() * 10 + 10,
-      speed: Math.random() * 2 + 1,
-      alpha: Math.random() * 0.8 + 0.2
+// chuva de corações (final)
+function iniciarCoracoes(duracao) {
+  const end = Date.now() + duracao * 1000;
+  (function frame() {
+    // corações descendo por toda a tela, inclusive laterais
+    confetti({
+      particleCount: 8,
+      spread: 70,
+      startVelocity: 25,
+      colors: ["#ff1493", "#ff69b4", "#ffc0cb", "#fff0f5"],
+      origin: { x: Math.random(), y: 0 },
+      gravity: 0.6,
+      scalar: 1.3,
+      shapes: ["heart"]
     });
-  }
-
-  function drawHearts() {
-    heartsCtx.clearRect(0, 0, heartsCanvas.width, heartsCanvas.height);
-    hearts.forEach(h => {
-      heartsCtx.globalAlpha = h.alpha;
-      heartsCtx.fillStyle = "#ff80ab";
-      heartsCtx.beginPath();
-      heartsCtx.moveTo(h.x, h.y);
-      heartsCtx.bezierCurveTo(h.x - h.size / 2, h.y - h.size / 2,
-        h.x - h.size, h.y + h.size / 3,
-        h.x, h.y + h.size);
-      heartsCtx.bezierCurveTo(h.x + h.size, h.y + h.size / 3,
-        h.x + h.size / 2, h.y - h.size / 2,
-        h.x, h.y);
-      heartsCtx.fill();
-      h.y -= h.speed;
-      if (h.y < -20) h.y = heartsCanvas.height + 20;
-    });
-    requestAnimationFrame(drawHearts);
-  }
-  drawHearts();
+    if (Date.now() < end) requestAnimationFrame(frame);
+  })();
 }
 
-// 🎉 Confetes coloridos
-function startConfetti(duration = 5000) {
-  const confettiCanvas = document.createElement("canvas");
-  const ctx = confettiCanvas.getContext("2d");
-
-  confettiCanvas.style.position = "fixed";
-  confettiCanvas.style.top = "0";
-  confettiCanvas.style.left = "0";
-  confettiCanvas.style.width = "100%";
-  confettiCanvas.style.height = "100%";
-  confettiCanvas.style.zIndex = "999";
-  confettiCanvas.style.pointerEvents = "none";
-  document.body.appendChild(confettiCanvas);
-
-  confettiCanvas.width = window.innerWidth;
-  confettiCanvas.height = window.innerHeight;
-
-  const confetti = [];
-  const colors = ["#ff4081", "#ffeb3b", "#4caf50", "#2196f3", "#ff9800", "#e91e63"];
-
-  for (let i = 0; i < 150; i++) {
-    confetti.push({
-      x: Math.random() * confettiCanvas.width,
-      y: Math.random() * -confettiCanvas.height,
-      size: Math.random() * 8 + 4,
-      color: colors[Math.floor(Math.random() * colors.length)],
-      speed: Math.random() * 3 + 2,
-      angle: Math.random() * 360,
-      rotationSpeed: Math.random() * 10 - 5
-    });
-  }
-
-  let animationFrame;
-
-  function drawConfetti() {
-    ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
-    confetti.forEach(c => {
-      ctx.save();
-      ctx.translate(c.x, c.y);
-      ctx.rotate((c.angle * Math.PI) / 180);
-      ctx.fillStyle = c.color;
-      ctx.fillRect(-c.size / 2, -c.size / 2, c.size, c.size);
-      ctx.restore();
-
-      c.y += c.speed;
-      c.angle += c.rotationSpeed;
-
-      if (c.y > confettiCanvas.height) {
-        c.y = -10;
-        c.x = Math.random() * confettiCanvas.width;
-      }
-    });
-    animationFrame = requestAnimationFrame(drawConfetti);
-  }
-
-  drawConfetti();
-
-  // Para e remove o confete após o tempo definido
-  setTimeout(() => {
-    cancelAnimationFrame(animationFrame);
-    confettiCanvas.remove();
-  }, duration);
-}
+// biblioteca de confete
+const script = document.createElement("script");
+script.src = "https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js";
+document.head.appendChild(script);
