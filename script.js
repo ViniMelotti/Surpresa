@@ -17,7 +17,7 @@ startButton.addEventListener('click', () => {
     startScreen.classList.add('hidden');
     message.classList.remove('hidden');
     typeText();
-    startConfetti(25000); // confete começa junto com a mensagem
+    startConfetti(26000); // confete começa junto com a mensagem
   }, 600);
 });
 
